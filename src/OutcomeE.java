@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import src.Reception;
 import src.Preferences;
 import src.Request;
+import src.MatcherManager;
 
 // Main
 public class OutcomeE {
@@ -62,3 +63,5 @@ class TimeRange {
 
     boolean isInRange(TimeRange range) { return true; }
 }
+
+class Feedback {}
