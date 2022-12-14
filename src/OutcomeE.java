@@ -1,12 +1,5 @@
 package src;
-import java.time.LocalDateTime;
 
-import src.User;
-import src.Reception;
-import src.Preferences;
-import src.Request;
-import src.MatcherManager;
-import src.Scheduler;
 import src.gui.controller.*;
 import src.gui.view.*;
 
@@ -21,15 +14,15 @@ public class OutcomeE {
         CreateRequestView createRequestView = new CreateRequestView();
         RequestConfirmationView requestConfirmView = new RequestConfirmationView();
         CreateRequestController createRequestController = new CreateRequestController(createRequestView, reception);
-        ConfirmationController confirmationController = new ConfirmationController(requestConfirmView);
+        ConfirmationController confirmationController = new ConfirmationController(requestConfirmView, reception);
 
         // Following lines are the sequence diagram workflow
 
         // Imitate user pressing a "Create Request" button
         createRequestController.onCreatePressed();
-        // Imitate user pressing "accept"
-        confirmationController.onConfirmationButtonPressed(true);
         // Imitate user pressing "decline"
         confirmationController.onConfirmationButtonPressed(false);
+        // Imitate user pressing "accept"
+        confirmationController.onConfirmationButtonPressed(true);
     }
 }

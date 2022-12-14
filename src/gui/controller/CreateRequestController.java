@@ -5,12 +5,10 @@ import src.gui.view.CreateRequestView;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import src.Location;
 import src.PetType;
 import src.Reception;
 import src.Request;
 import src.Requester;
-import src.TimeRange;
 
 public class CreateRequestController {
     CreateRequestView view;

@@ -68,8 +68,27 @@ class Matcher {
 
         System.out.println("[Matcher] Created");
     }
-    public void accept(Request request, Responder responder) {}
-    public void decline(Request request, Responder responder) {}
+    public void accept(Request request, Responder responder) {
+        System.out.println("[Matcher] accept() called");
+
+        System.out.println("[Matcher] Destroying matchCandidates");
+        this.matchCandidates = null; // Candidates are not needed anymore
+
+        // Schedule a payment job
+        PaymentDetails details = null; // Dummy details
+        PaymentJob paymentJob = new PaymentJob(details);
+        scheduler.addJob(paymentJob);
+
+        // Schedule confirmed confiramtion job (notify users)
+        ConfirmedConnectionJob connectionJob = new ConfirmedConnectionJob(request);
+        scheduler.addJob(connectionJob);
+    }
+
+    public void decline(Request request, Responder responder) {
+        System.out.println("[Matcher] decline() called");
+
+        notifyCandidates();
+    }
 
     void notifyCandidates() {
         System.out.println("[Matcher] notifyCandidates() called");
@@ -96,8 +115,20 @@ public class MatcherManager {
 
         System.out.println("[MatcherManager] Creating new Matcher");
         Matcher matcher = new Matcher(request, scheduler);
+        matchers.add(matcher);
     }
     
-    public void acceptRequest(Request request, Responder responder) {}
-    public void declineRequest(Request request, Responder responder) {}
+    public void acceptRequest(Request request, Responder responder) {
+        System.out.println("[MatcherManager] acceptRequest() called");
+    
+        Matcher matcher = matchers.get(0); // Find relevant matcher
+        matcher.accept(request, responder);
+    }
+
+    public void declineRequest(Request request, Responder responder) {
+        System.out.println("[MatcherManager] declineRequest() called");
+    
+        Matcher matcher = matchers.get(0); // Find relevant matcher
+        matcher.decline(request, responder);
+    }
 }

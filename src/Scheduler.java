@@ -7,7 +7,9 @@ public class Scheduler {
     ArrayList<ScheduledJob> jobs;
 
     public Scheduler() {}
-    public void addJob(Job job) {}
+    public void addJob(Job job) {
+        System.out.println("[Scheduler] Scheduled a job");
+    }
 }
 
 class ScheduledJob {
@@ -27,7 +29,10 @@ class PaymentJob implements Job {
     PaymentDetails details;
     ThirdPartyPaymentServices paymentServices;
 
-    public PaymentJob(PaymentDetails details, ThirdPartyPaymentServices paymentServices) {}
+    public PaymentJob(PaymentDetails details) {
+        System.out.println("[PaymentJob] Created");
+    }
+
     public void execute() {}
 }
 
@@ -50,6 +55,9 @@ class ConfirmRequestJob implements Job {
 class ConfirmedConnectionJob implements Job {
     Request request;
 
-    public ConfirmedConnectionJob(Request request) {}
+    public ConfirmedConnectionJob(Request request) {
+        System.out.println("[ConfirmedConnectionJob] Created");
+    }
+
     public void execute() {}
 }
