@@ -10,10 +10,10 @@ class Match {
     Feedback responderFeedbacks[];
 
     public Match(Requester requester, Responder responder) {
-        System.out.println("[Match] Created");
+        System.out.println("    [Match] Created");
     }
     public int getMatchScore() {
-        System.out.println("[Match] getMatchScore() called");
+        System.out.println("    [Match] getMatchScore() called");
         return 5;
     }
 }
@@ -27,11 +27,11 @@ class MatchCandidates {
         this.matches = new ArrayList<Match>();
         this.findMatches();
 
-        System.out.println("[MatchCandidates] Created");
+        System.out.println("    [MatchCandidates] Created");
     }
 
     public ArrayList<Responder> getBestResponders(int count) {
-        System.out.println("[MatchCandidates] getBestResponders() called");
+        System.out.println("    [MatchCandidates] getBestResponders() called");
         ArrayList<Responder> responders = new ArrayList<Responder>();
         for (int i = 0; i < count; i = i+1) {
             matches.get(i).getMatchScore(); // Dummy call
@@ -41,7 +41,7 @@ class MatchCandidates {
     }
 
     void findMatches() {
-        System.out.println("[MatchCandidates] findMatches() called");
+        System.out.println("    [MatchCandidates] findMatches() called");
         // Add dummy matches
         // Would search database in real code
         for (int i = 0; i < 9; i = i+1) {
@@ -59,19 +59,19 @@ class Matcher {
     Scheduler scheduler;
 
     public Matcher(Request request, Scheduler scheduler) {
-        System.out.println("[Matcher] Creating new MatchCandidates");
+        System.out.println("    [Matcher] Creating new MatchCandidates");
         this.scheduler = scheduler;
         this.request = request;
         matchCandidates = new MatchCandidates(request);
 
         notifyCandidates();
 
-        System.out.println("[Matcher] Created");
+        System.out.println("    [Matcher] Created");
     }
     public void accept(Request request, Responder responder) {
-        System.out.println("[Matcher] accept() called");
+        System.out.println("    [Matcher] accept() called");
 
-        System.out.println("[Matcher] Destroying matchCandidates");
+        System.out.println("    [Matcher] Destroying matchCandidates");
         this.matchCandidates = null; // Candidates are not needed anymore
 
         // Schedule a payment job
@@ -85,13 +85,13 @@ class Matcher {
     }
 
     public void decline(Request request, Responder responder) {
-        System.out.println("[Matcher] decline() called");
+        System.out.println("    [Matcher] decline() called");
 
         notifyCandidates();
     }
 
     void notifyCandidates() {
-        System.out.println("[Matcher] notifyCandidates() called");
+        System.out.println("    [Matcher] notifyCandidates() called");
         ArrayList<Responder> responders = matchCandidates.getBestResponders(3);
 
         for (Responder responder : responders) {
@@ -111,22 +111,22 @@ public class MatcherManager {
     }
 
     public void newMatcher(Request request) {
-        System.out.println("[MatcherManager] newMatcher() called");
+        System.out.println("    [MatcherManager] newMatcher() called");
 
-        System.out.println("[MatcherManager] Creating new Matcher");
+        System.out.println("    [MatcherManager] Creating new Matcher");
         Matcher matcher = new Matcher(request, scheduler);
         matchers.add(matcher);
     }
     
     public void acceptRequest(Request request, Responder responder) {
-        System.out.println("[MatcherManager] acceptRequest() called");
+        System.out.println("    [MatcherManager] acceptRequest() called");
     
         Matcher matcher = matchers.get(0); // Find relevant matcher
         matcher.accept(request, responder);
     }
 
     public void declineRequest(Request request, Responder responder) {
-        System.out.println("[MatcherManager] declineRequest() called");
+        System.out.println("    [MatcherManager] declineRequest() called");
     
         Matcher matcher = matchers.get(0); // Find relevant matcher
         matcher.decline(request, responder);

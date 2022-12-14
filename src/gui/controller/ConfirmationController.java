@@ -20,10 +20,10 @@ public class ConfirmationController {
     // Event handlers
     public void onConfirmationButtonPressed(boolean confirmation) {
         if (confirmation) {
-            System.out.println("[ConfirmationController] User pressed Accept button");
+            System.out.println("\n[ConfirmationController] User pressed Accept button");
             reception.acceptRequest(responder, request);
         } else {
-            System.out.println("[ConfirmationController] User pressed Decline button");
+            System.out.println("\n[ConfirmationController] User pressed Decline button");
             reception.declineRequest(responder, request);
         }
     }

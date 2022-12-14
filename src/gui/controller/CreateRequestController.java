@@ -28,7 +28,7 @@ public class CreateRequestController {
     }
     // Event handlers
     public void onCreatePressed() {
-        System.out.println("[CreateRequestController] User pressed Create Request button");
+        System.out.println("\n[CreateRequestController] User pressed Create Request button");
 
         // Create a new request
         Request newRequest = new Request(

@@ -5,7 +5,7 @@ public class Location {
     double coordinates[];
 
     public Location(String address, double coordinates[]) {
-        System.out.println("[Location] Created");
+        System.out.println("    [Location] Created");
     }
     public boolean isInRadius(Location location, int radius) { return true; }
 }

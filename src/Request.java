@@ -18,7 +18,7 @@ public class Request {
         time = new TimeRange(startTime, endTime);
         location = new Location(address, coordinates);
 
-        System.out.println("[Request] Created");
+        System.out.println("    [Request] Created");
     }
     // Setters
     public void setResponder(Responder responder) {};
