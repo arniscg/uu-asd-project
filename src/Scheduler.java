@@ -23,7 +23,7 @@ interface Job {
 
 class ThirdPartyPaymentServices {}
 
-class PaymentJob {
+class PaymentJob implements Job {
     PaymentDetails details;
     ThirdPartyPaymentServices paymentServices;
 
@@ -31,21 +31,23 @@ class PaymentJob {
     public void execute() {}
 }
 
-class RequestUpdateJob {
+class RequestUpdateJob implements Job {
     Request request;
 
     public RequestUpdateJob(Request request) {}
     public void execute() {}
 }
 
-class ConfirmRequestJob {
+class ConfirmRequestJob implements Job {
     Request request;
 
-    public ConfirmRequestJob(Request request) {}
+    public ConfirmRequestJob(Responder responder, Request request) {
+        System.out.println("[CreateRequestJob] Created");
+    }
     public void execute() {}
 }
 
-class ConfirmedConnectionJob {
+class ConfirmedConnectionJob implements Job {
     Request request;
 
     public ConfirmedConnectionJob(Request request) {}
