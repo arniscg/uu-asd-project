@@ -18,13 +18,13 @@ public class ConfirmationController {
     public void displayConfirmation(Request request) {}
     Responder responder = new Responder("", "", ""); // The user
     // Event handlers
-    public void onConfirmationButtonPressed(boolean confirmation) {
-        if (confirmation) {
+    public void onConfirmationButtonPressed(boolean aceepted) {
+        if (aceepted) {
             System.out.println("\n[ConfirmationController] User pressed Accept button");
-            reception.acceptRequest(responder, request);
+            reception.acceptRequest(responder, request); // Asynchronous
         } else {
             System.out.println("\n[ConfirmationController] User pressed Decline button");
-            reception.declineRequest(responder, request);
+            reception.declineRequest(responder, request); // Asynchronous
         }
     }
 }

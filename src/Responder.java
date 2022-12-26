@@ -1,8 +1,8 @@
 package src;
 
 public class Responder extends User {
-    Preferences preferences;
-    Location location;
+    private Preferences preferences;
+    private Location location;
 
     public Responder(String name, String phoneNumber, String email) {}
 
@@ -11,3 +11,4 @@ public class Responder extends User {
     public Preferences getPreferences() { return preferences; }
     public Location getLocation() { return location; }
 }
+

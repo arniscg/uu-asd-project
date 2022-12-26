@@ -16,7 +16,7 @@ public class Reception {
     public void acceptRequest(Responder responder, Request request) {
         System.out.println("    [Reception] acceptRequest() called");
 
-        matcherManager.acceptRequest(request, responder);
+        matcherManager.acceptRequest(request, responder); // Asynchronous
     }
 
     public void declineRequest(Responder responder, Request request) {

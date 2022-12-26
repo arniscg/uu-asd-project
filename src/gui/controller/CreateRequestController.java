@@ -26,16 +26,28 @@ public class CreateRequestController {
         this.view = view;
         this.reception = reception;
     }
+
+    public boolean validateInput() {
+        return true;
+    }
+
     // Event handlers
     public void onCreatePressed() {
         System.out.println("\n[CreateRequestController] User pressed Create Request button");
+
+        if (!validateInput()) {
+            // Handle the input errors
+        }
 
         // Create a new request
         Request newRequest = new Request(
             requester, startTime, endTime, petTypes,
             address, coordinates, description);
 
+        // Save the request into databse
+
         // Ask Reception to start matching the request
+        // This would be an asynchronous function call
         reception.matchRequest(newRequest);
     }
 }

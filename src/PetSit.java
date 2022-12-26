@@ -3,18 +3,19 @@ package src;
 import src.gui.controller.*;
 import src.gui.view.*;
 
-// Main
 public class PetSit {
     public static void main(String[] args) {
-        // Create singleton objects (not singleton right now)
+        // Create singleton objects (not actually singleton right now)
         Scheduler scheduler = new Scheduler();
         MatcherManager matcherManager = new MatcherManager(scheduler);
         Reception reception = new Reception(matcherManager);
         // Create GUI components
         CreateRequestView createRequestView = new CreateRequestView();
         RequestConfirmationView requestConfirmView = new RequestConfirmationView();
-        CreateRequestController createRequestController = new CreateRequestController(createRequestView, reception);
-        ConfirmationController confirmationController = new ConfirmationController(requestConfirmView, reception);
+        CreateRequestController createRequestController =
+            new CreateRequestController(createRequestView, reception);
+        ConfirmationController confirmationController =
+            new ConfirmationController(requestConfirmView, reception);
 
         // Following lines are the sequence diagram workflowS
 

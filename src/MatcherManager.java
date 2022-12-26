@@ -36,6 +36,7 @@ class MatchCandidates {
         for (int i = 0; i < count; i = i+1) {
             matches.get(i).getMatchScore(); // Dummy call
             responders.add(matches.get(i).responder);
+            // In real implementatoin would sort candidates by score probably
         }
         return responders;
     }
@@ -72,31 +73,37 @@ class Matcher {
         System.out.println("    [Matcher] accept() called");
 
         System.out.println("    [Matcher] Destroying matchCandidates");
-        this.matchCandidates = null; // Candidates are not needed anymore
+        // Delete candidates (not needed anymore)
+        this.matchCandidates = null;
+        
+        // request.setResponder(responder);
+        // Update Request in database
 
         // Schedule a payment job
         PaymentDetails details = null; // Dummy details
         PaymentJob paymentJob = new PaymentJob(details);
-        scheduler.addJob(paymentJob);
+        scheduler.addJob(paymentJob); // Asynchronous
 
         // Schedule confirmed confiramtion job (notify users)
         ConfirmedConnectionJob connectionJob = new ConfirmedConnectionJob(request);
-        scheduler.addJob(connectionJob);
+        scheduler.addJob(connectionJob); // Asynchronous
     }
 
     public void decline(Request request, Responder responder) {
         System.out.println("    [Matcher] decline() called");
 
+        // Check if enough responders have declined and then
+        // notify the next potential responder batch
         notifyCandidates();
     }
 
-    void notifyCandidates() {
+    private void notifyCandidates() {
         System.out.println("    [Matcher] notifyCandidates() called");
         ArrayList<Responder> responders = matchCandidates.getBestResponders(3);
 
         for (Responder responder : responders) {
             ConfirmRequestJob job = new ConfirmRequestJob(responder, request);
-            scheduler.addJob(job);
+            scheduler.addJob(job); // Asynchronous
         }
     }
 }

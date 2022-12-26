@@ -4,12 +4,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Request {
-    Requester requester;
-    Responder responder;
-    TimeRange time;
-    List<PetType> petTypes;
-    Location location;
-    String description;
+    private Requester requester;
+    private Responder responder;
+    private TimeRange time;
+    private List<PetType> petTypes;
+    private Location location;
+    private String description;
 
     public Request(Requester requester,
         LocalDateTime startTime, LocalDateTime endTime, List<PetType> petTypes,
@@ -20,6 +20,7 @@ public class Request {
 
         System.out.println("    [Request] Created");
     }
+
     // Setters
     public void setResponder(Responder responder) {};
     // Getters
